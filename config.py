@@ -17,3 +17,5 @@ is_calibration = False
 
 is_input_word = False
 finish_input_word = False
+
+length_array = 0

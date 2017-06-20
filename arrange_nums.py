@@ -81,13 +81,13 @@ class Arrange:
             self.count = 0
         if is_calibration == True:
             is_calibration = Calibrate.start_calibration(is_calibration, np.array(raw_list).astype(np.int64))
+        input_array = np.array(raw_list).astype(np.int64) - config.calibration_numbers
         if config.is_input_word:
-            input_array = np.array(raw_list).astype(np.int64) - config.calibration_numbers
-            mouth_gestures.append(input_array)
+            self.mouth_gestures.append(input_array)
             print("Calibration Mode is ", is_calibration, ":input array = ", input_array, ":MODE = ", self.MODE)
         if config.c != "1025":
             if config.finish_input_word:
-                self.write_ceps(mouth_gestures, c)
+                self.write_ceps(self.mouth_gestures, c)
                 config.finish_input_word = False
                 print("Mouth gestures was Captured!")
             else:

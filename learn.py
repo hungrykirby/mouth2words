@@ -25,7 +25,7 @@ def keys():
         elif console_input == "o":
             config.is_calibration = True
         elif console_input != config.c:
-            config.c = input_word
+            config.c = console_input
             print("c =", config.c)
         else:
             print("else")
@@ -36,12 +36,12 @@ def osc_loop():
     parser.add_argument("--port", type=int, default=8082, help="The port to listen on")
     args = parser.parse_args()
 
-    learner = learn.Arrange()
+    learner = an.Arrange()
     learner.make_dir_train_or_test()
 
     _dispatcher = dispatcher.Dispatcher()
     #_dispatcher.map("/found", osc.set_found)
-    _dispatcher.map("/raw", an.fetch_numbers)
+    _dispatcher.map("/raw", learner.fetch_numbers)
 
     server = osc_server.ThreadingOSCUDPServer(
       (args.ip, args.port), _dispatcher)
